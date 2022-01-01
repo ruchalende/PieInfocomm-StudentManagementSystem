@@ -5,3 +5,8 @@ Admin: Can view all teachers, students and can allot a classes to teachers
 Teachers: Can view the classes allotted to them by admin and the students in their class
 Student: Can view their information
 
+Scripting Language: JSP Servlet
+Technology: Advanced Java
+IDE: Netbeans
+Webserver: Apache Tomcat
+Database server: MySQL
