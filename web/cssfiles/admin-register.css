@@ -1,0 +1,27 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Dec 27, 2021, 3:11:07 PM
+    Author     : rucha
+*/
+.form{
+    height: 35px;
+    width: 570px;
+    padding: 70px;
+    
+}
+input[type="submit"] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    border-radius: 5px; 
+}
+.register{
+    padding: 100px;
+}
+
+
+
