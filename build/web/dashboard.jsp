@@ -22,8 +22,21 @@
     Connection con = null;  
     Statement stmt = null;
     ResultSet rs = null;
-    //int userid = Integer.parseInt(request.getParameter("userid")); 
+    //int userid = Integer.parseInt(request.getParameter("userid"));
+    String msg = (String) request.getAttribute("msg"); 
     int userid=(Integer) request.getAttribute("userid");
+    if(msg!=null && msg!=""){ 
+  
+%> <script>
+    var msg = " <%=msg %> ";
+        if(msg!==""){
+            alert(msg);
+        }
+    </script>
+         
+         <%
+    }
+        
     String usertype = (String) request.getAttribute("usertype"); 
     Class.forName("com.mysql.jdbc.Driver");
     con =DriverManager.getConnection      //opens the connection
@@ -58,7 +71,7 @@
         <% if(email!=""){
             
          %>
-        <label>Hello <%=first_name+" "+last_name %> </label><br>
+         <label><center><h2>Hello <%=first_name+" "+last_name %> </h2></center> </label><br>
         
         <% 
             }
@@ -70,7 +83,7 @@
             int branch_id=0;
             %>
         <table style="border:3px solid midnightblue">
-            <label>TEACHER DETAILS</label>
+            <br><br><br><br><label><strong>TEACHER DETAILS</strong></label><br><br>
             <tr><th style="border:3px solid midnightblue">TEACHER FIRST NAME</th><th style="border:3px solid midnightblue">TEACHER LAST NAME</th><th style="border:3px solid midnightblue">TEACHER EMAIL</th>
                 <!-- following the should be in while list of classes -->
                 <% while(class_rs.next()){
@@ -107,13 +120,25 @@
                 </tr>
             <%
                 
-                }      
+                }   %>
+                <form action="DeleteRecord" method="post">
+                    Enter Email To Delete Records:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="first_name" value="<%=first_name%>">
+                    <input type="hidden" name="last_name" value="<%=last_name%>">
+                    <input type="hidden" name="email" value="<%=email%>">
+                    <input type="submit" name="submit" value="submit">
+                    <br><br>
+                </form>
+                <%
             ResultSet student_rs=null;
             String sql4="SELECT * FROM student;";
             student_rs = stmt.executeQuery(sql4);
             %>
             </table>
-            <br><label>STUDENT DETAILS</label>
+            <br><br><br><br><label><strong>STUDENT DETAILS</strong></label><br><br>
         <table style="border:3px solid midnightblue" padding="5px">
         <tr><th style="border:3px solid midnightblue">STUDENT FIRST NAME</th><th style="border:3px solid midnightblue">STUDENT LAST NAME</th><th style="border:3px solid midnightblue">STUDENT EMAIL</th></tr>
         <%

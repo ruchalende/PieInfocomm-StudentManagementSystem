@@ -28,6 +28,10 @@
         <servlet-name>LogoutUser</servlet-name>
         <servlet-class>com.app.LogoutUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteRecord</servlet-name>
+        <servlet-class>com.app.DeleteRecord</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminRegister</servlet-name>
         <url-pattern>/AdminRegister</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LogoutUser</servlet-name>
         <url-pattern>/LogoutUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRecord</servlet-name>
+        <url-pattern>/DeleteRecord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
