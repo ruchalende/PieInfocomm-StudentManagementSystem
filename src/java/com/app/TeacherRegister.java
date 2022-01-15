@@ -82,7 +82,7 @@ public class TeacherRegister extends HttpServlet {
             session.setAttribute("email",email);
             request.setAttribute("userid", userid);
             request.setAttribute("usertype", "teacher");
-            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("teacher-login.html").forward(request, response);
             }
         }catch (SQLException e) {
                 throw new ServletException("Servlet Could not display records.", e);

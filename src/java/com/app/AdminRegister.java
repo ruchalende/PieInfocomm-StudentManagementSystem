@@ -55,7 +55,7 @@ public class AdminRegister extends HttpServlet {
             
             rs=stmt.executeQuery(check_email);  */
             String check_email="SELECT * from admin where email='"+email+"'";
-            dbconnection2 db=new dbconnection2();
+            dbconnection db=new dbconnection();
             rs=db.mysqldbconnection(check_email, 0);
             
             int count=0;
@@ -78,7 +78,7 @@ public class AdminRegister extends HttpServlet {
             /*stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             rs = stmt.getGeneratedKeys();  */
             //rs=new dbconnection(sql, "update");
-            dbconnection2 db2=new dbconnection2();
+            dbconnection db2=new dbconnection();
             r=db2.mysqldbconnection(sql, 1);
             int userid=1;
             if (r.next()) {
@@ -90,7 +90,7 @@ public class AdminRegister extends HttpServlet {
             session.setAttribute("email",email);
             request.setAttribute("userid", userid);
             request.setAttribute("usertype", "admin");
-            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("admin-login.html").forward(request, response);
             //response.sendRedirect("dashboard.jsp?userid="+userid+"&usertype=admin");
             }
         }catch (SQLException e) {

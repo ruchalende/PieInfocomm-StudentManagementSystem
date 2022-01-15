@@ -84,7 +84,7 @@ public class StudentRegister extends HttpServlet {
             session.setAttribute("class",stu_class);
             request.setAttribute("userid", userid);
             request.setAttribute("usertype", "student");
-            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("student-login.html").forward(request, response);
         //response.sendRedirect("dashboard.jsp?userid="+userid+"&usertype=student");
             }
         }catch (SQLException e) {

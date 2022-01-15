@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 public class dbconnection {
     
-    public ResultSet mysqldbconnection(String sql, String operation) throws ClassNotFoundException, SQLException{
+    public ResultSet mysqldbconnection(String sql, int choice) throws ClassNotFoundException, SQLException{
         Connection con = null;  
         Statement stmt = null;
         ResultSet rs = null;
@@ -26,15 +26,20 @@ public class dbconnection {
         con =DriverManager.getConnection     
         ("jdbc:mysql://127.0.0.1:3306/ruchalende_studentmanangement","root",""); 
         stmt = con.createStatement();
-        if(operation.equals("execute")){
-            rs=stmt.executeQuery(sql);
-        }
-        else if(operation.equals("update")){
-            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            rs = stmt.getGeneratedKeys();
-        }
-        else{
-            out.print("operation neither execute nor update");
+        switch(choice){
+            case 0:{
+                rs=stmt.executeQuery(sql);
+            }
+                break;
+                
+            case 1:{
+                stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+                rs = stmt.getGeneratedKeys();
+            }
+                break;
+                
+            default:
+                out.print("wrong choice!");
         }
         return rs;
     }

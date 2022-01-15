@@ -32,6 +32,14 @@
         <servlet-name>DeleteRecord</servlet-name>
         <servlet-class>com.app.DeleteRecord</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateRecord</servlet-name>
+        <servlet-class>com.app.UpdateRecord</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchRecord</servlet-name>
+        <servlet-class>com.app.SearchRecord</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminRegister</servlet-name>
         <url-pattern>/AdminRegister</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>DeleteRecord</servlet-name>
         <url-pattern>/DeleteRecord</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRecord</servlet-name>
+        <url-pattern>/UpdateRecord</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchRecord</servlet-name>
+        <url-pattern>/SearchRecord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

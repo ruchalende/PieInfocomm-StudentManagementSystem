@@ -38,37 +38,28 @@ public class DeleteRecord extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String _fetch = request.getParameter("fetch");
         String usertype = request.getParameter("usertype");
+        String recordtype = request.getParameter("recordtype");
         int userid = Integer.parseInt (request.getParameter("userid"));
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
-        String email = request.getParameter("email");
         Connection con=null;
         Class.forName("com.mysql.jdbc.Driver");
         con=DriverManager.getConnection
-        ("jdbc:mysql://127.0.0.1:3306/ruchalende_studentmanangement","root",""); ;
+        ("jdbc:mysql://127.0.0.1:3306/ruchalende_studentmanangement","root",""); 
           if(!con.isClosed())
             {
             
-        PreparedStatement ps=con.prepareStatement("delete from teachers where email =?");
+        PreparedStatement ps=con.prepareStatement("delete from "+recordtype+" where email =?");
                        ps.setString(1, _fetch);
                         int  a1=ps.executeUpdate();
                         String msg="";
                         if(a1>0)
                         {
-                             msg="Record deleted!";
-                    // javax.swing.JOptionPane.showMessageDialog(null,"Record deleted");
-                     /*HttpSession session=request.getSession(); 
-                    session.setAttribute("first_name",first_name); 
-                    session.setAttribute("last_name",last_name); 
-                    session.setAttribute("email",email); */
-                    request.setAttribute("userid", userid);
-                    request.setAttribute("usertype", usertype);
-                    
-                    //response.sendRedirect("dashboard.jsp");
+                             msg="Record Deleted!";
+                            request.setAttribute("userid", userid);
+                            request.setAttribute("usertype", usertype);
                          }
                         else
                         {
-                             msg="somthing went wrong";//javax.swing.JOptionPane.showMessageDialog(null,"somthing went wrong"); 
+                             msg="Somthing Went Wrong!";//javax.swing.JOptionPane.showMessageDialog(null,"somthing went wrong"); 
                         }
                         
                         request.setAttribute("msg", msg);

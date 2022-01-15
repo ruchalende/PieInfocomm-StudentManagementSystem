@@ -56,7 +56,24 @@
         <% } else { %>
         <title>Teacher Dashboard</title>
         <% } %>
+        <style>
+            th, td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                border: 2px black solid;
+            }
+            p{
+                border: 3px black solid;
+                height: 250px;
+                width: 500px;   
+                background-color: blanchedalmond;
+            }
+            
+        </style>
     </head>
+    <center>
     <body>
         <form method="post" action="LogoutUser" >
             <input type="hidden" name="usertype" value="<%=usertype%>">
@@ -71,7 +88,7 @@
         <% if(email!=""){
             
          %>
-         <label><center><h2>Hello <%=first_name+" "+last_name %> </h2></center> </label><br>
+         <label><center><h1>Hello, <%=first_name+" "+last_name %>! </h1></center> </label><hr><br>
         
         <% 
             }
@@ -82,16 +99,36 @@
             int year=0;
             int branch_id=0;
             %>
-        <table style="border:3px solid midnightblue">
-            <br><br><br><br><label><strong>TEACHER DETAILS</strong></label><br><br>
-            <tr><th style="border:3px solid midnightblue">TEACHER FIRST NAME</th><th style="border:3px solid midnightblue">TEACHER LAST NAME</th><th style="border:3px solid midnightblue">TEACHER EMAIL</th>
-                <!-- following the should be in while list of classes -->
-                <% while(class_rs.next()){
+        <form action="DeleteRecord" method="post">
+                    Enter Email To Delete A Teacher Record:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="teachers">
+                    <input type="submit" name="submit" value="submit">
+        </form> <br>
+        <form action="search-record.jsp" method="post">
+                    Enter Email To Search A Teacher Record:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="teachers">
+                    <input type="submit" name="submit" value="submit">
+        </form> <br>
+            <table>
+            <br><label><strong>TEACHER DETAILS</strong></label><br><br>
+            <tr>
+            <th>TEACHER ID</th>
+            <th>TEACHER FIRST NAME</th>
+                <th>TEACHER LAST NAME</th>
+                <th>TEACHER EMAIL</th>
+                <!-- following the should be in while list of classes 
+                </% while(class_rs.next()){
                     year=class_rs.getInt("year");
                     branch_id=class_rs.getInt("branch_id");
                  %>
-                <th style="border:3px solid midnightblue"><%=year+"_"+branch_id %></th>
-                <% } %>
+                <th></%=year+"_"+branch_id %></th>
+                </% } %> -->
             </tr>
             <%
                 
@@ -99,65 +136,81 @@
                 String teacher_last_name=null;
                 String teacher_email=null;
                 ResultSet teacher_rs=null;
+                int teacher_id=0;
                 Statement st=null;
                 st = con.createStatement();
                 String sql3="SELECT * FROM teachers;";
                 teacher_rs = st.executeQuery(sql3);
                 while(teacher_rs.next()){
+                teacher_id=teacher_rs.getInt("id");
                 teacher_first_name=teacher_rs.getString("first_name");
                 teacher_last_name=teacher_rs.getString("last_name");
                 teacher_email=teacher_rs.getString("email");   
             %>
                 <tr>
-                    <td style="border:3px solid midnightblue"> <%= teacher_first_name %> </td>
-                    <td style="border:3px solid midnightblue"> <%= teacher_last_name %> </td>
-                    <td style="border:3px solid midnightblue"> <%= teacher_email %> </td>
+                    <td> <%= teacher_id %> </td>
+                    <td> <%= teacher_first_name %> </td>
+                    <td> <%= teacher_last_name %> </td>
+                    <td> <%= teacher_email %> </td>
                     <!-- while -->
-                    <% class_rs = stmt.executeQuery(sql2);
+        <!--            </% class_rs = stmt.executeQuery(sql2);   
                         while(class_rs.next()){ %>
-                    <td style="border:3px solid midnightblue"> <input type="checkbox" name="chkteacher"></td>
-                <% } %>
+                    <td> <input type="checkbox" name="chkteacher"></td>
+                </% } %>  -->
                 </tr>
             <%
-                
-                }   %>
-                <form action="DeleteRecord" method="post">
-                    Enter Email To Delete Records:&nbsp&nbsp&nbsp
-                    <input type="text" name="fetch">
-                    <input type="hidden" name="usertype" value="<%=usertype%>">
-                    <input type="hidden" name="userid" value="<%=userid%>">
-                    <input type="hidden" name="first_name" value="<%=first_name%>">
-                    <input type="hidden" name="last_name" value="<%=last_name%>">
-                    <input type="hidden" name="email" value="<%=email%>">
-                    <input type="submit" name="submit" value="submit">
-                    <br><br>
-                </form>
-                <%
+                }
             ResultSet student_rs=null;
             String sql4="SELECT * FROM student;";
             student_rs = stmt.executeQuery(sql4);
             %>
             </table>
-            <br><br><br><br><label><strong>STUDENT DETAILS</strong></label><br><br>
-        <table style="border:3px solid midnightblue" padding="5px">
-        <tr><th style="border:3px solid midnightblue">STUDENT FIRST NAME</th><th style="border:3px solid midnightblue">STUDENT LAST NAME</th><th style="border:3px solid midnightblue">STUDENT EMAIL</th></tr>
+            <br><br><hr><br>
+                <form action="DeleteRecord" method="post">
+                    Enter Email To Delete A Student Record:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="student">
+                    <input type="submit" name="submit" value="submit">
+                    <br><br>
+                </form>
+                    <form action="search-record.jsp" method="post">
+                    Enter Email To Search A Student Record:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="student">
+                    <input type="submit" name="submit" value="submit">
+                </form> <br>
+                <label><strong>STUDENT DETAILS</strong></label><br><br>
+        <table>
+        <tr>
+            <th>STUDENT ID</th>
+            <th>STUDENT FIRST NAME</th>
+            <th>STUDENT LAST NAME</th>
+            <th>STUDENT EMAIL</th>
+            <th>CLASS</th>
+        </tr>
         <%
-                
+                int student_id=0;
                 String student_first_name=null;
                 String student_last_name=null;
                 String student_email=null;
                 int student_class=0;
                 while(student_rs.next()){
+                    student_id=student_rs.getInt("id");
                 student_first_name=student_rs.getString("first_name");
                 student_last_name=student_rs.getString("last_name");
                 student_email=student_rs.getString("email"); 
                 student_class=Integer.parseInt(student_rs.getString("class"));
             %>
                 <tr>
-                    <td style="border:3px solid midnightblue"> <%= student_first_name %> </td>
-                    <td style="border:3px solid midnightblue"> <%= student_last_name %> </td>
-                    <td style="border:3px solid midnightblue"> <%= student_email %> </td>
-                    <td style="border:3px solid midnightblue"> <%= student_class %> </td>
+                    <td> <%= student_id %> </td>
+                    <td> <%= student_first_name %> </td>
+                    <td> <%= student_last_name %> </td>
+                    <td> <%= student_email %> </td>
+                    <td> <%= student_class %> </td>
                 </tr>
         <% 
             }
@@ -167,17 +220,37 @@
             ResultSet stu=null;
             String sql5="SELECT * FROM student where id="+userid;
             stu = stmt.executeQuery(sql5);
+            while(stu.next()){
+                first_name=stu.getString("first_name");
+                last_name=stu.getString("last_name");
+                email=stu.getString("email"); 
+                stu_class=Integer.parseInt(stu.getString("class"));
+            }
                 if(email!=""){
         %>
         
-        <label>STUDENT DETAILS</label><br>
-        <label>Hello <%=first_name+" "+last_name %> </label><br>
-        <label>First Name:<%=first_name%></label><br>
-        <label>Last Name:<%=last_name%></label><br>
-        <label>Email:<%=email%></label><br>
-        <label>Class:<%=stu_class%></label><br>
+        <label><h1>Hello, <%=first_name+" "+last_name %>!</h1></label><br><hr>
+        <h3><label>STUDENT DETAILS</label><br><br>
+        <p><br>
+        <label>ID:<%=userid%></label><br><br>
+        <label>First Name: <%=first_name%></label><br><br>
+        <label>Last Name: <%=last_name%></label><br><br>
+        <label>Email: <%=email%></label><br><br>
+        <label>Class: <%=stu_class%></label><br><br></h3>
+        
+        
         <%
-            }
+            }  %>
+            
+        <form action="edit-record.jsp" method="post">
+                    Enter Email To Update Your Details:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="student">
+                    <input type="submit" name="submit" value="submit">
+                </form>
+        <%
 }
         
         else if(usertype.equals(teacher)==true){
@@ -187,27 +260,43 @@
             String teacher_class="";
             //int student_class=0;
             while(teach.next()){
-                teacher_class=teach.getString("classes");  
-}
+                //teacher_class=teach.getString("classes");
+                
+                first_name=teach.getString("first_name");
+                last_name=teach.getString("last_name");
+                email=teach.getString("email");
+            }
          if(email!=""){
             
          %>
-        <label>Hello <%=first_name+" "+last_name %> </label><br>
-            <label>TEACHER DETAILS</label><br>
-        <label>First Name:<%=first_name%></label><br>
-        <label>Last Name:<%=last_name%></label><br>
-        <label>Email:<%=email%></label><br>
-        <label>Class:<%=teacher_class%></label><br>
+         <h1><label>Hello, <%=first_name+" "+last_name %>!</label><br></h1><hr>
+         <h3><br><br><label>TEACHER DETAILS</label><br><br><p><br><br>
+         <label>ID:<%=userid%></label><br><br      
+        <label>First Name:<%=first_name%></label><br><br>
+        <label>Last Name:<%=last_name%></label><br><br>
+        <label>Email:<%=email%></label></h3>
+    <!--    <label>Class:</%=teacher_class%></label><br><br></h3>  -->
         <%
-            }
+            } 
+        %>
+        <form action="edit-record.jsp" method="post">
+                    Enter Email To Update Your Details:&nbsp&nbsp&nbsp
+                    <input type="text" name="fetch">
+                    <input type="hidden" name="usertype" value="<%=usertype%>">
+                    <input type="hidden" name="userid" value="<%=userid%>">
+                    <input type="hidden" name="recordtype" value="teachers">
+                    <input type="submit" name="submit" value="submit">
+                </form>
+        <%
             //show list of students from the class allocated to teacher
 //get branch and class from teacher table and then get list of students from that branch and class
-        }
-
+        
+            }
         else{
          out.print("not a valid user");
         }
 %>
+        </center>
         </body>
         
 </html>
