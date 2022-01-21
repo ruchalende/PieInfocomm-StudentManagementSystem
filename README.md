@@ -1,5 +1,4 @@
 # StudentManagementSystem
-This is the project I was assigned when I was an intern at Pie Infocomm.
 
 A student management Java web application for institute admin, students and teachers
 
